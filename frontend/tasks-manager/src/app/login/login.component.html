@@ -1,12 +1,18 @@
-<h2>Login</h2>
-<form  #loginForm="">
-  <mat-form-field>
-    <input matInput type="email" id="email" name="email"  required>
-    <mat-label>Email</mat-label>
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput type="password" id="password" name="password"  required>
-    <mat-label>Password</mat-label>
-  </mat-form-field>
-  <button mat-raised-button type="submit" [disabled]="">Login</button>
-</form>
+<div class="login-container">
+  <mat-card class="login-card">
+    <mat-card-content>
+      <mat-card-title>Welcome back please login!</mat-card-title>
+      <form [formGroup]="loginForm" (ngSubmit)="login()" class="d-flex flex-column align-items-center justify-content-center">
+        <mat-form-field class="w-100">
+          <input matInput formControlName="email" placeholder="Email">
+        </mat-form-field>
+        <br>
+        <mat-form-field class="w-100">
+          <input matInput formControlName="password" placeholder="Password" type="password">
+        </mat-form-field>
+        <br>
+        <button mat-raised-button color="primary" type="submit">Login</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
