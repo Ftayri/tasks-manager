@@ -6,6 +6,8 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerFile = require('./swagger_output.json');
 const specs = require('./swagger');
 
+const itemRouter = require('./routes/ItemsRoutes');
+
 
 // Serve Swagger UI
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
@@ -18,11 +20,14 @@ app.listen(3000, () => {
 
 app.use(express.json());
 mongoose.connect('mongodb://127.0.0.1:27017/tasks-database', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 
 })
-    .then(() => console.log('Connected to MongoDB'))
-    .catch((error) => console.error(error));
+  .then(() => console.log('Connected to MongoDB'))
+  .catch((error) => console.error(error));
 
 app.use('/api', tasksRouter);
+app.use('/api', itemRouter);
+
+
