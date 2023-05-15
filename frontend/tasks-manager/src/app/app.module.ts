@@ -11,6 +11,8 @@ import { RegistrationComponent } from './registration/registration.component';
 import {MatCardModule} from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FirebaseModule } from './Firebase.module';
+import {MatIconModule} from '@angular/material/icon';
+
 
 
 
@@ -30,7 +32,8 @@ import { FirebaseModule } from './Firebase.module';
     MatButtonModule,
     MatCardModule,
     ReactiveFormsModule,
-    FirebaseModule
+    FirebaseModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
