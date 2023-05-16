@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const todolistRouter = require('./routes/ToDoListRoutes');
 const mongoose = require('mongoose');
 const swaggerUi = require('swagger-ui-express');
 const swaggerFile = require('./swagger_output.json');
@@ -8,6 +7,8 @@ const specs = require('./swagger');
 
 const taskRouter = require('./routes/TaskRoutes');
 const usersRouter = require('./routes/UserRoutes');
+const todolistRouter = require('./routes/ToDoListRoutes');
+const dashboardRouter = require('./routes/DashboardRoutes');
 
 
 // Serve Swagger UI
@@ -31,5 +32,5 @@ mongoose.connect('mongodb://127.0.0.1:27017/tasks-database', {
 app.use('/api', todolistRouter);
 app.use('/api', taskRouter);
 app.use('/api', usersRouter);
-
+app.use('/api', dashboardRouter );
 
