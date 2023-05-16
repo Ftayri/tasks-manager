@@ -4,9 +4,10 @@ const ToDoList = require('../Models/TodoList');
 
 module.exports = {
     async createUser(req, res) {
-        const { username } = req.body;
+        const { username, firebaseUid } = req.body;
 
         const newUser = new User({
+            firebaseUid,
             username,
         });
         try {

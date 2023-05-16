@@ -132,40 +132,6 @@
             "description": "Internal Server Error"
           }
         }
-      },
-      "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "title": {
-                  "example": "any"
-                },
-                "createdAt": {
-                  "example": "any"
-                },
-                "tasks": {
-                  "example": "any"
-                },
-                "dueDate": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
       }
     },
     "/todolist/{toDoListId}/task": {
@@ -276,6 +242,9 @@
               "type": "object",
               "properties": {
                 "username": {
+                  "example": "any"
+                },
+                "firebaseUid": {
                   "example": "any"
                 }
               }
