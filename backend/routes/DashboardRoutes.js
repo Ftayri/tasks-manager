@@ -3,5 +3,6 @@ const router = express.Router();
 const dashboardController = require('../controllers/DashboardController');
 
 router.post('/dashboard/tasks', dashboardController.dashboardTasks);
+router.post('/dashboard/todolist', dashboardcontroller.getUserToDoListStats);
 
 module.exports = router;
