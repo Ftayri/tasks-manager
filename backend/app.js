@@ -1,12 +1,13 @@
 const express = require('express');
 const app = express();
-const tasksRouter = require('./routes/TaskRoutes');
+const todolistRouter = require('./routes/ToDoListRoutes');
 const mongoose = require('mongoose');
 const swaggerUi = require('swagger-ui-express');
 const swaggerFile = require('./swagger_output.json');
 const specs = require('./swagger');
 
-const itemRouter = require('./routes/ItemsRoutes');
+const taskRouter = require('./routes/TaskRoutes');
+const usersRouter = require('./routes/UserRoutes');
 
 
 // Serve Swagger UI
@@ -27,7 +28,8 @@ mongoose.connect('mongodb://127.0.0.1:27017/tasks-database', {
   .then(() => console.log('Connected to MongoDB'))
   .catch((error) => console.error(error));
 
-app.use('/api', tasksRouter);
-app.use('/api', itemRouter);
+app.use('/api', todolistRouter);
+app.use('/api', taskRouter);
+app.use('/api', usersRouter);
 
 

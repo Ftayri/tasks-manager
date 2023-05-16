@@ -1,80 +1,58 @@
 const Task = require('../Models/Task');
-const Item = require('../Models/Item');
 
 module.exports = {
     async getAllTasks(req, res) {
         try {
-            const tasks = await Task.find().populate({
-                path: 'items',
-                select: 'title priority status'
-            });
-            res.json(tasks);
+            const Tasks = await Task.find();
+            res.json(Tasks);
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: 'Server error' });
+            res.status(500).json({ message: 'Server Error' });
         }
     },
 
     async createTask(req, res) {
-        const { title, createdAt, items } = req.body;
-
-        // Create the items and save them to the database
-        const createdItems = await Item.insertMany(items);
-
-        // Map the created items to their ObjectIds
-        const itemIds = createdItems.map((item) => item._id);
-
-        // Create the task with the item ObjectIds
-        const newTask = new Task({
-            title,
-            createdAt,
-            items: itemIds,
-        });
-
         try {
-            await newTask.save();
-            const task = await Task.findById(newTask._id).populate('items');
-            res.json(task);
+            const { title, priority, status } = req.body;
+            const newTask = new Task({ title, priority, status });
+            const savedTask = await newTask.save();
+            res.json(savedTask);
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: 'Server error' });
+            res.status(500).json({ message: 'Server Error' });
         }
     },
 
     async updateTask(req, res) {
-        const { id } = req.params;
-        const { title, items } = req.body;
-
         try {
-            const task = await Task.findByIdAndUpdate(
+            const { id } = req.params;
+            const { title, priority, status } = req.body;
+            const updatedTask = await Task.findByIdAndUpdate(
                 id,
-                { title, items },
+                { title, priority, status },
                 { new: true }
-            ).populate('items');
-
-            if (!task) {
+            );
+            if (!updatedTask) {
                 return res.status(404).json({ message: 'Task not found' });
             }
-
-            res.json(task);
+            res.json(updatedTask);
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: 'Server error' });
+            res.status(500).json({ message: 'Server Error' });
         }
     },
 
     async deleteTask(req, res) {
-        const { id } = req.params;
-
         try {
-            const task = await Task.findByIdAndDelete(id).populate('items');
-            if (!task) {
+            const { id } = req.params;
+            const deletedTask = await Task.findByIdAndDelete(id);
+            if (!deletedTask) {
                 return res.status(404).json({ message: 'Task not found' });
             }
-            res.json({ message: 'Task deleted' });
+            res.json(deletedTask);
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: 'Server error' });
+            res.status(500).json({ message: 'Server Error' });
         }
     },
 };
