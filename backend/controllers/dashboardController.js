@@ -36,10 +36,10 @@ module.exports = {
     },
 
     async getUserToDoListStats(req, res) {
-        const { id } = req.body;
+        const { firebaseUid } = req.body;
         try {
 
-            const user = await User.findById(id).populate("todolists");
+            const user = await User.where({ firebaseUid: firebaseUid }).populate("todolists");
             const currentDate = new Date();
             const overdueCount = user.todolists.filter(todolist => new Date(todolist.dueDate) < currentDate).length;
             const totalCount = user.todolists.length;
@@ -88,6 +88,7 @@ function getToDoListCountPerDayLast7Days(json) {
 
         const count = json.todolists.reduce((total, todolist) => {
             const todolistDate = new Date(todolist.createdAt);
+            console.log(todolistDate);
             if (
                 todolistDate.getFullYear() === currentDateMinusDays.getFullYear() &&
                 todolistDate.getMonth() === currentDateMinusDays.getMonth() &&
