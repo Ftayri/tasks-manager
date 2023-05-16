@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const swaggerUi = require('swagger-ui-express');
-const swaggerFile = require('./swagger_output.json');
+const swaggerFile = require('./.swagger_output.json');
 const specs = require('./swagger');
 
 const taskRouter = require('./routes/TaskRoutes');
