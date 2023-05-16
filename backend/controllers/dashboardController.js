@@ -39,35 +39,22 @@ module.exports = {
         const { firebaseUid } = req.body;
         try {
 
-            const user = await User.where({ firebaseUid: firebaseUid }).populate("todolists");
-            const currentDate = new Date();
-            const overdueCount = user.todolists.filter(todolist => new Date(todolist.dueDate) < currentDate).length;
-            const totalCount = user.todolists.length;
-            console.log(overdueCount);
-            console.log(totalCount);
-            //number of todolist added in the last 7 days per day
-            const todolistAddedInLast7Days = user.todolists.filter(todolist => {
-                const todolistDate = new Date(todolist.createdAt);
-                const todolistDatePlus7Days = new Date(todolistDate.setDate(todolistDate.getDate() + 7));
-                return todolistDatePlus7Days > currentDate;
-            }).length;
-            console.log(todolistAddedInLast7Days);
-
-            //number of todolist per day in the last 7 days
-            const todolistPerDayInLast7Days = getToDoListCountPerDayLast7Days(user);
-
-            console.log(todolistPerDayInLast7Days)
-
+            const user = await User.where({ firebaseUid: firebaseUid }).findOne().populate('todolists');
+            const todoLists = user.todolists;
+            const totalToDoLists = todoLists.length;
+            const overdueToDoLists = todoLists.filter(todolist => todolist.dueDate < Date.now()).length;
+            //get number of todolists created per day for the last 7 days
+            const countPerDay = getToDoListCountPerDayLast7Days(todoLists);
+            const response = {
+                totalToDoLists,
+                overdueToDoLists,
+                countPerDay,
+            }
+            res.json(response);
             if (!user) {
                 return res.status(404).json({ message: 'User not found' });
             }
-
-            res.json(user);
         } catch (error) { }
-
-
-
-
 
     }
 
@@ -76,31 +63,15 @@ module.exports = {
 
 
 function getToDoListCountPerDayLast7Days(json) {
-    const currentDate = new Date();
-    const sevenDaysAgo = new Date(currentDate);
-    sevenDaysAgo.setDate(currentDate.getDate() - 7);
-
-    const countPerDay = {};
-
+    //get todolists created per day for the last 7 days
+    const todolistsPerDay = [];
+    const today = new Date();
     for (let i = 0; i < 7; i++) {
-        const currentDateMinusDays = new Date(sevenDaysAgo);
-        currentDateMinusDays.setDate(sevenDaysAgo.getDate() + i);
-
-        const count = json.todolists.reduce((total, todolist) => {
-            const todolistDate = new Date(todolist.createdAt);
-            console.log(todolistDate);
-            if (
-                todolistDate.getFullYear() === currentDateMinusDays.getFullYear() &&
-                todolistDate.getMonth() === currentDateMinusDays.getMonth() &&
-                todolistDate.getDate() === currentDateMinusDays.getDate()
-            ) {
-                return total + 1;
-            }
-            return total;
-        }, 0);
-
-        countPerDay[currentDateMinusDays.toDateString()] = count;
+        const day = new Date(today);
+        day.setDate(day.getDate() - i);
+        const dayCount = json.filter(todolist => todolist.createdAt.toDateString() === day.toDateString()).length;
+        todolistsPerDay.push(dayCount);
     }
+    return todolistsPerDay;
 
-    return countPerDay;
 }
