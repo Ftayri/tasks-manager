@@ -15,36 +15,6 @@ module.exports = {
         }
     },
 
-    async createToDoList(req, res) {
-        const { title, createdAt, tasks, dueDate } = req.body;
-
-        // Create the Tasks and save them to the database
-        const createdTasks = await Task.insertMany(tasks);
-
-        // Map the created Tasks to their ObjectIds
-        const taskIds = createdTasks.map((task) => task._id);
-
-        // Create the ToDoList with the Task ObjectIds
-        const newToDoList = new ToDoList({
-            title,
-            createdAt,
-            dueDate,
-            tasks: createdTasks,
-        });
-
-        try {
-            await newToDoList.save();
-            const toDoList = await ToDoList.findById(newToDoList._id).populate({
-                path: 'tasks',
-                select: 'title priority status'
-            });
-            res.json(toDoList);
-        } catch (error) {
-            console.error(error);
-            res.status(500).json({ message: 'Server error' });
-        }
-    },
-
     async updateToDoList(req, res) {
         const { id } = req.params;
         const { title, tasks } = req.body;
