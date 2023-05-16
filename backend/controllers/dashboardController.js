@@ -63,7 +63,6 @@ module.exports = {
 
 
 function getToDoListCountPerDayLast7Days(json) {
-    //get todolists created per day for the last 7 days
     const todolistsPerDay = [];
     const today = new Date();
     for (let i = 0; i < 7; i++) {
