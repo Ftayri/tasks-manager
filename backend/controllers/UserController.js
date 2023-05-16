@@ -23,7 +23,8 @@ module.exports = {
         try {
             const { title, dueDate } = req.body;
             const { userId } = req.params;
-            const user = await User.findById(userId);
+            //find user by firebaseUid
+            const user = await User.where({firebaseUid: userId}).findOne();
             const newToDoList = new ToDoList({ title, dueDate, tasks: [] });
             user.todolists.push(newToDoList);
             await newToDoList.save();
