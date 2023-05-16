@@ -1,0 +1,20 @@
+<div class="registration-container">
+  <mat-card class="registration-card">
+    <mat-card-content>
+      <mat-card-title>Welcome to Tasks Manager!</mat-card-title>
+      <form [formGroup]="registrationForm" (ngSubmit)="register()" class="d-flex flex-column align-items-center justify-content-center">
+        <mat-form-field appearance="outline">
+          <input matInput formControlName="email" placeholder="Email">
+          <mat-icon matSuffix>mail</mat-icon>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="outline">
+          <input matInput formControlName="password" placeholder="Password" type="password">
+          <mat-icon matSuffix>lock</mat-icon>
+        </mat-form-field>
+        <br>
+        <button mat-raised-button color="primary" type="submit">Register</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
