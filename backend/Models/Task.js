@@ -5,20 +5,17 @@ const taskSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    description: {
+    priority: {
         type: String,
-        required: true,
+        default: 'normal'
     },
-    completed: {
-        type: Boolean,
-        default: false,
+    status: {
+        type: String,
+        default: 'pending'
     },
-    createdAt: {
-        type: Date,
-        default: Date.now,
-    },
+
 });
 
 const Task = mongoose.model('Task', taskSchema);
 
-module.exports = Task;
+module.exports = { Task, taskSchema };
