@@ -8,6 +8,7 @@ const specs = require('./swagger');
 
 const taskRouter = require('./routes/TaskRoutes');
 const usersRouter = require('./routes/UserRoutes');
+const dashboardRoutes = require('./routes/DashboardRoutes');
 
 
 // Serve Swagger UI
@@ -31,5 +32,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/tasks-database', {
 app.use('/api', todolistRouter);
 app.use('/api', taskRouter);
 app.use('/api', usersRouter);
+app.use('/api', dashboardRoutes);
+
 
 

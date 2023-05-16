@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const UserController = require('../controllers/UserController');
 
-// router.get('/todolist', ToDoListController.getAllToDoLists);
+router.post('/user', UserController.getUser);
 router.post('/create-user', UserController.createUser);
 router.post('/user/:userId/todoList', UserController.createToDoList);
 
