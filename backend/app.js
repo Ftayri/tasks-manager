@@ -1,16 +1,17 @@
 const express = require('express');
-const app = express();
+const cors = require('cors');
 const mongoose = require('mongoose');
 const swaggerUi = require('swagger-ui-express');
 const swaggerFile = require('./.swagger_output.json');
 const specs = require('./swagger');
+
 
 const taskRouter = require('./routes/TaskRoutes');
 const usersRouter = require('./routes/UserRoutes');
 const todolistRouter = require('./routes/ToDoListRoutes');
 const dashboardRouter = require('./routes/DashboardRoutes');
 
-
+const app = express();
 // Serve Swagger UI
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
@@ -33,4 +34,5 @@ app.use('/api', todolistRouter);
 app.use('/api', taskRouter);
 app.use('/api', usersRouter);
 app.use('/api', dashboardRouter );
+app.use(cors());
 
