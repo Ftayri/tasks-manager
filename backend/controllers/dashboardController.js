@@ -68,9 +68,9 @@ function getToDoListCountPerDayLast7Days(json) {
     for (let i = 0; i < 7; i++) {
         const day = new Date(today);
         day.setDate(day.getDate() - i);
-        const dayCount = json.filter(todolist => todolist.createdAt.toDateString() === day.toDateString()).length;
-        todolistsPerDay.push(dayCount);
+        const dayCount = json.filter(todolist => todolist.createdAt.getDate() === day.getDate()).length;
+        todolistsPerDay.push({ day: day.getDate(), count: dayCount });
     }
-    return todolistsPerDay;
+    return todolistsPerDay.reverse();
 
 }

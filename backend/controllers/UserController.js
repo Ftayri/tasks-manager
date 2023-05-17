@@ -21,11 +21,11 @@ module.exports = {
     //create todolist and add to user
     async createToDoList(req, res) {
         try {
-            const { title, dueDate } = req.body;
+            const { title, dueDate, description } = req.body;
             const { userId } = req.params;
             //find user by firebaseUid
             const user = await User.where({ firebaseUid: userId }).findOne();
-            const newToDoList = new ToDoList({ title, dueDate, tasks: [] });
+            const newToDoList = new ToDoList({ title, dueDate, description, tasks: [] });
             user.todolists.push(newToDoList);
             await newToDoList.save();
             await user.save();

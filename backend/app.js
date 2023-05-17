@@ -12,6 +12,7 @@ const todolistRouter = require('./routes/ToDoListRoutes');
 const dashboardRouter = require('./routes/DashboardRoutes');
 
 const app = express();
+app.use(cors());
 // Serve Swagger UI
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
@@ -34,5 +35,4 @@ app.use('/api', todolistRouter);
 app.use('/api', taskRouter);
 app.use('/api', usersRouter);
 app.use('/api', dashboardRouter );
-app.use(cors());
 

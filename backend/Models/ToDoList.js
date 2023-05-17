@@ -6,26 +6,26 @@ const todolistSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-
-    tasks: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Task' // Referencing the Task model
-        }// Referencing the Task model
-    ],
+    description: {
+        type: String,
+        // required: true,
+    },
     createdAt: {
         type: Date,
         default: Date.now,
-        // required: true,
-    },
-    description: {
-        type: String,
         // required: true,
     },
     dueDate: {
         type: Date,
         // required: true,
     },
+    tasks: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Task' // Referencing the Task model
+        }// Referencing the Task model
+    ],
+
 
 });
 
