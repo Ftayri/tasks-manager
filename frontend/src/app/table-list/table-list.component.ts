@@ -4,6 +4,7 @@ import { ModalDeleteComponent } from 'app/modal-delete/modal-delete.component';
 import { ModalViewComponent } from 'app/modal-view/modal-view.component';
 import { ToDoListService } from 'app/services/to-do-list.service';
 import { ToDoList } from 'app/models/to-do-list';
+import { ModalEditComponent } from 'app/modal-edit/modal-edit.component';
 
 @Component({
   selector: 'app-table-list',
@@ -29,9 +30,7 @@ export class TableListComponent implements OnInit {
       }
     });
   }
-  editTodoList(id: number) {
 
-  }
   viewTodoList(id: number) {
     this.toDoListService.getToDoList(id).subscribe(
       (res) => {
@@ -51,5 +50,29 @@ export class TableListComponent implements OnInit {
         this.toDoLists = res;
       },);
   }
-}
 
+
+
+  editTodoList(id: string) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+
+    this.toDoListService.getToDoListById(id).subscribe(
+      (res) => {
+        this.toDoList = res;
+        console.log(this.toDoList);
+        dialogConfig.data = this.toDoList;
+        this.dialog.open(ModalEditComponent, dialogConfig).afterClosed().subscribe(
+          (res: ToDoList) => {
+            this.toDoList = res;
+            this.ngOnInit();
+          }
+        );
+
+
+      }
+    );
+
+  }
+
+}

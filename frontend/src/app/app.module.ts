@@ -14,6 +14,10 @@ import { ModalDeleteComponent } from './modal-delete/modal-delete.component';
 import { MatDialogModule } from '@angular/material/dialog';
 
 import { ModalViewComponent } from './modal-view/modal-view.component';
+import { ModalEditComponent } from './modal-edit/modal-edit.component';
+
+import { MatButtonModule } from '@angular/material/button';
+
 
 
 @NgModule({
@@ -29,12 +33,14 @@ import { ModalViewComponent } from './modal-view/modal-view.component';
     MatNativeDateModule,
     MatInputModule,
     MatDialogModule,
+    MatButtonModule,
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     ModalDeleteComponent,
     ModalViewComponent,
+    ModalEditComponent,
 
   ],
   providers: [],

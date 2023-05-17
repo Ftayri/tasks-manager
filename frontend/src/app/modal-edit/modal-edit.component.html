@@ -1,0 +1,34 @@
+<form class="example-form" [formGroup]="todoform" (submit)="updateTodoList(toDoList._id)">
+    <mat-form-field class="example-full-width">
+        <!-- <mat-label>Company (disabled)</mat-label> -->
+        <input matInput disabled value="TodoList Edit">
+    </mat-form-field>
+
+    <table class="example-full-width" cellspacing="0">
+        <tr>
+            <td><mat-form-field class="example-full-width">
+                    <mat-label>Title</mat-label>
+                    <input matInput placeholder="{{toDoList.title}}" formControlName="title">
+                </mat-form-field></td>
+            <td></td>
+        </tr>
+    </table>
+
+    <p>
+        <mat-form-field class="example-full-width">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description">{{toDoList.description}}</textarea>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Due date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="dueDate"
+                placeholder="{{toDoList.dueDate |date: 'dd/MM/yyyy'}}">
+            <mat-hint>YYYY/MM/DD</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </p>
+    <div style="text-align: center;">
+        <button mat-raised-button color="warn" type="submit">Submit</button>
+    </div>
+</form>

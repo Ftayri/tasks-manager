@@ -18,13 +18,16 @@
                                         Title
                                     </th>
                                     <th>
-                                        Tasks
+                                        Description
                                     </th>
                                     <th>
                                         Created At
                                     </th>
                                     <th>
                                         Due Date
+                                    </th>
+                                    <th>
+                                        Tasks
                                     </th>
                                     <th>
                                         Actions
@@ -39,13 +42,16 @@
                                             {{row.title}}
                                         </td>
                                         <td>
-                                            {{row.tasks.length}}
+                                            {{row.description}}
                                         </td>
                                         <td>
                                             {{row.createdAt | date: 'dd/MM/yyyy'}}
                                         </td>
                                         <td class=" text-warning">
                                             {{row.dueDate | date: 'dd/MM/yyyy'}}
+                                        </td>
+                                        <td class=" text-warning">
+                                            {{row.tasks.length}}
                                         </td>
                                         <td>
                                             <button class="btn btn-success btn-sm" (click)="viewTodoList(row._id)">
