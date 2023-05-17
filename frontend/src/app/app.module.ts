@@ -10,6 +10,8 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
+import { ModalViewComponent } from './modal-view/modal-view.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 @NgModule({
@@ -24,10 +26,12 @@ import { MatInputModule } from '@angular/material/input';
     MatDatepickerModule,
     MatNativeDateModule,
     MatInputModule,
+    MatDialogModule
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
+    ModalViewComponent,
 
   ],
   providers: [],

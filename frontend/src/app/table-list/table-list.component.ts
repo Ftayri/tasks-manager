@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalViewComponent } from 'app/modal-view/modal-view.component';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Task } from 'app/models/task';
 import { ToDoListService } from 'app/services/to-do-list.service';
+import { ToDoList } from 'app/models/to-do-list';
 
 @Component({
   selector: 'app-table-list',
@@ -8,25 +11,35 @@ import { ToDoListService } from 'app/services/to-do-list.service';
   styleUrls: ['./table-list.component.css']
 })
 export class TableListComponent implements OnInit {
-  todolists: {
-    title: string,
-    description: string,
-    dueDate: Date,
-    tasks: Task[],
-    createdAt: Date,
-  };
+  toDoLists: ToDoList[];
+  toDoList: ToDoList;
 
 
-constructor(private todolistser: ToDoListService) { }
+constructor(private toDoListService: ToDoListService, private modalView: MatDialog) { }
+deleteTodoList(id:number){
 
+}
+editTodoList(id:number){
+  
+}
+viewTodoList(id:number){
+  this.toDoListService.getToDoList(id).subscribe(
+    (res) => {
+      this.toDoList = res;
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = false;
+      dialogConfig.autoFocus = true;
+      dialogConfig.data = this.toDoList;
+      this.modalView.open(ModalViewComponent, dialogConfig);
+    }
+  );
+}
 ngOnInit() {
-  this.todolistser.getToDoLists("362a9yi8bAZEG3gVoRIa91dVerS2").subscribe(
+  this.toDoListService.getToDoLists("362a9yi8bAZEG3gVoRIa91dVerS2").subscribe(
     (res) => {
       console.log(res);
-      this.todolists = res;
+      this.toDoLists = res;
     },);
-
-
 }
 }
 
