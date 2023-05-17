@@ -1,63 +1,89 @@
-<div class="main-content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header card-header-danger">
-                        <h4 class="card-title ">{{ toDoList.title }}</h4>
-                        <p class="card-category"> All Todo-Lists </p>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead class=" text-primary">
-                                    <th>
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header card-header-danger">
+            <h4 class="card-title ">{{ toDoList.title }}</h4>
+            <p class="card-category"> {{ toDoList.description }} </p>
+        </div>
 
-                                    </th>
-                                    <th>
-                                        Title
-                                    </th>
-                                    <th>
-                                        Priority
-                                    </th>
-                                    <th>
-                                        Status
-                                    </th>
-                                    <th>
-                                        Actions
-                                    </th>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let row of toDoList.tasks;let i = index">
-                                        <td>
-                                            {{i+1}}
-                                        </td>
-                                        <td>
-                                            {{row.title}}
-                                        </td>
-                                        <td>
-                                            {{row.priority}}
-                                        </td>
-                                        <td>
-                                            {{row.status}}
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-danger btn-sm" (click)="deleteTodoList(row._id)">
-                                                <i class="material-icons">delete</i>
-                                            </button>
-                                            <button class="btn btn-info btn-sm" (click)="editTodoList(row._id)">
-                                                <i class="material-icons">edit</i>
-                                            </button>
-                                        </td>
-                                    </tr>
+        <div class="card-body">
+            <button class="btn btn-info btn-sm">
+                <i class="material-icons">add_circle</i>
+                Add Task
+            </button>
+            <div class="table-responsive">
 
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                <table class="table">
+                    <thead class=" text-primary">
+                        <th>
+
+                        </th>
+                        <th>
+                            Title
+                        </th>
+                        <th>
+                            Priority
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th>
+                            Actions
+                        </th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let row of toDoList.tasks; let i = index" [formGroup]="taskForms[i]">
+                            <td>{{ i + 1 }}</td>
+
+                            <td *ngIf="editIndex !== i">
+                                {{ row.title }}
+                            </td>
+                            <td *ngIf="editIndex === i">
+                                <input style="width: 100px;" type="text" formControlName="title">
+                            </td>
+
+                            <td *ngIf="editIndex !== i"
+                                [ngClass]="{'text-danger': row.priority === 'High', 'text-warning': row.priority === 'Normal', 'text-success': row.priority === 'Low'}">
+                                {{ row.priority }}
+                            </td>
+                            <td *ngIf="editIndex === i">
+                                <select formControlName="priority" value = {{taskForms[i].priority}}>
+                                    <option value="High">High</option>
+                                    <option value="Normal">Normal</option>
+                                    <option value="Low">Low</option>
+                                </select>
+                            </td>
+
+                            <td *ngIf="editIndex !== i"
+                                [ngClass]="{'text-warning': row.status === 'Pending', 'text-success': row.status === 'Completed'}">
+                                {{ row.status }}
+                            </td>
+                            <td *ngIf="editIndex === i">
+                                <select formControlName="status" value = {{taskForms[i].status}}>
+                                    <option value="Pending">Pending</option>
+                                    <option value="Completed">Completed</option>
+                                </select>
+                            </td>
+
+                            <td>
+                                <button *ngIf="editIndex !== i" class="btn btn-info btn-sm" (click)="editMode(i)">
+                                    <i class="material-icons">edit</i>
+                                </button>
+                                <button *ngIf="editIndex === i" class="btn btn-info btn-sm"
+                                    (click)="editTask(row._id, i)">
+                                    <i class="material-icons">done</i>
+                                </button>
+                                <button *ngIf="editIndex === i" class="btn btn-warning btn-sm" (click)="cancelEdit(i)">
+                                    <i class="material-icons">cancel</i>
+                                </button>
+                                <button class="btn btn-danger btn-sm" (click)="deleteTodoList(row._id)">
+                                    <i class="material-icons">delete</i>
+                                </button>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
             </div>
-
         </div>
     </div>
 </div>
