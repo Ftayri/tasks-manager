@@ -32,7 +32,7 @@ export class TableListComponent implements OnInit {
   editTodoList(id: number) {
 
   }
-  viewTodoList(id: number) {
+  viewTodoList(id: string) {
     this.toDoListService.getToDoList(id).subscribe(
       (res) => {
         this.toDoList = res;
@@ -40,7 +40,12 @@ export class TableListComponent implements OnInit {
         dialogConfig.disableClose = false;
         dialogConfig.autoFocus = true;
         dialogConfig.data = this.toDoList;
-        this.modalView.open(ModalViewComponent, dialogConfig);
+        this.modalView.open(ModalViewComponent, dialogConfig).afterClosed().subscribe(
+          (res: ToDoList) => {
+            this.toDoList = res;
+            this.ngOnInit();
+          }
+        );
       }
     );
   }

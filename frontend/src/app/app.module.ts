@@ -14,6 +14,7 @@ import { ModalDeleteComponent } from './modal-delete/modal-delete.component';
 import { MatDialogModule } from '@angular/material/dialog';
 
 import { ModalViewComponent } from './modal-view/modal-view.component';
+import { ModalTaskComponent } from './modal-task/modal-task.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { ModalViewComponent } from './modal-view/modal-view.component';
     AdminLayoutComponent,
     ModalDeleteComponent,
     ModalViewComponent,
+    ModalTaskComponent,
 
   ],
   providers: [],

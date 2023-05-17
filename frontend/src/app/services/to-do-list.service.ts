@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Task } from 'app/models/task';
 @Injectable({
   providedIn: 'root'
 })
@@ -30,7 +31,14 @@ export class ToDoListService {
     return this.httpClient.delete(`${this.API_URL_TODO}/${id}`);
   }
 
-  getToDoList(id: number): Observable<any> {
+  getToDoList(id: string): Observable<any> {
     return this.httpClient.get(`${this.API_URL_TODO}/${id}`);
+  }
+  addTask(id: string, task: Task): Observable<any> {
+     return this.httpClient.post(`${this.API_URL_TODO}/${id}/task`, {
+      title: task.title,
+      priority: task.priority,
+      status: task.status,
+    });
   }
 }

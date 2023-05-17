@@ -1,0 +1,31 @@
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header card-header-danger">
+            <h4 class="card-title ">Create new task</h4>
+        </div>
+
+        <div class="card-body">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="row">
+                  <div class="col-md-6">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Title" type="text" formControlName="title">
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <label>Select Priority</label>
+                    <select matNativeControl formControlName="priority">
+                        <option *ngFor="let priority of priorities" [value]="priority">
+                          {{priority | titlecase}}
+                        </option>
+                      </select>
+                  </div>
+                </div>
+                <button mat-raised-button type="submit" class="btn btn-danger pull-right">Create Task</button>
+                <div class="clearfix"></div>
+              </form>
+        </div>
+    </div>
+</div>
