@@ -130,7 +130,7 @@ export class DashboardComponent implements OnInit {
         }
         var countToDoLists = new Chartist.Line('#toDoListsCount', dataCountToDoLists, optionsDataCountToDoLists);
         this.startAnimationForLineChart(countToDoLists);
-        const stats = [ this.todoListsStats.totalToDoLists, this.todoListsStats.overdueToDoLists];
+        const stats = [this.todoListsStats.totalToDoLists, this.todoListsStats.overdueToDoLists];
         var datatoDoListsStatusChart = {
           labels: ['Total', 'Overdue'],
           series: [
