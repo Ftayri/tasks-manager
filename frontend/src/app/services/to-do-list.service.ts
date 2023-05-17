@@ -8,8 +8,8 @@ export class ToDoListService {
   private API_URL = 'http://localhost:3000/api/user';
   constructor(private httpClient: HttpClient) { }
 
-  getToDoLists(firebaseUid: string): Observable<any>{
-    return this.httpClient.post(`${this.API_URL}/todolists`, {firebaseUid: firebaseUid});
+  getToDoLists(firebaseUid: string): Observable<any> {
+    return this.httpClient.post(`${this.API_URL}/todos`, { userId: firebaseUid });
   }
 
   createToDoList(firebaseUid: string, toDoList: any): Observable<any>{
