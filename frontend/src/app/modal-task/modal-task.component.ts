@@ -12,6 +12,7 @@ export class ModalTaskComponent implements OnInit {
 
   form: FormGroup;
   priorities: string[] = ['low', 'normal', 'high'];
+  status: string[] = ['pending', 'completed'];
   toDoListId: string;
   constructor(private dialogRef: MatDialogRef<ModalTaskComponent>, @Inject(MAT_DIALOG_DATA) data, private todoListService: ToDoListService) { 
     this.toDoListId = data;

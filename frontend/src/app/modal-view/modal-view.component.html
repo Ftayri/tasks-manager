@@ -14,7 +14,7 @@
                 <i class="material-icons">close</i>
                 close todo-list
             </button>
-            <div class="table-responsive">
+            <div class="table-responsive" *ngIf="toDoList.tasks.length > 0">
 
                 <table class="table">
                     <thead class=" text-primary">
