@@ -19,7 +19,7 @@ module.exports = {
             const totalPending = tasks.filter(task => task.status === 'pending').length;
             const pendingPerPriority = {
                 low: tasks.filter(task => task.status === 'pending' && task.priority === 'low').length,
-                medium: tasks.filter(task => task.status === 'pending' && task.priority === 'medium').length,
+                medium: tasks.filter(task => task.status === 'pending' && task.priority === 'normal').length,
                 high: tasks.filter(task => task.status === 'pending' && task.priority === 'high').length,
             }
             response ={
