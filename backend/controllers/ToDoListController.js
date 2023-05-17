@@ -1,17 +1,17 @@
 const ToDoList = require('../Models/ToDoList');
-const Task  = require('../Models/Task');
+const Task = require('../Models/Task');
 const User = require('../Models/User');
 
 module.exports = {
 
     async updateToDoList(req, res) {
         const { id } = req.params;
-        const { title, tasks } = req.body;
+        const { title, description, tasks } = req.body;
 
         try {
             const toDoList = await ToDoList.findByIdAndUpdate(
                 id,
-                { title, tasks },
+                { title, description, tasks },
                 { new: true }
             ).populate('tasks');
 
@@ -80,7 +80,7 @@ module.exports = {
             res.status(500).json({ message: 'Server error' });
         }
     },
-    
+
     async getToDoList(req, res) {
         try {
             const { id } = req.params;
@@ -92,7 +92,7 @@ module.exports = {
         } catch (error) {
             console.error(error);
             res.status(500).json({ message: 'Server error' });
-    }
+        }
     },
 
 };
