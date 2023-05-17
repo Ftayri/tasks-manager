@@ -1,5 +1,6 @@
 const ToDoList = require('../Models/TodoList');
 const { Task } = require('../Models/Task');
+const User = require('../Models/User');
 
 module.exports = {
 
@@ -17,7 +18,6 @@ module.exports = {
             if (!toDoList) {
                 return res.status(404).json({ message: 'ToDoList not found' });
             }
-
             res.json(toDoList);
         } catch (error) {
             console.error(error);
@@ -32,8 +32,10 @@ module.exports = {
             const toDoList = await ToDoList.findByIdAndDelete(id);
 
             if (!toDoList) {
-                return res.status(404).json({ message: 'ToDoList not found' });
+                return res.status(404).json({ message: 'ToDoList not found x' });
             }
+            await Task.deleteMany({ _id: { $in: toDoList.tasks } });
+            await User.updateMany({}, { $pull: { todolists: id } });
             res.json({ message: 'ToDoList deleted' });
         } catch (error) {
             console.error(error);

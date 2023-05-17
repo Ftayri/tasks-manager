@@ -28,6 +28,7 @@ module.exports = {
             if (!deletedTask) {
                 return res.status(404).json({ message: 'Task not found' });
             }
+            await ToDoList.updateMany({}, { $pull: { tasks: id } });
             res.json(deletedTask);
         } catch (error) {
             console.error(error);
