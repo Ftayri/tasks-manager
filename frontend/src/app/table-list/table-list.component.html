@@ -40,10 +40,10 @@
                                             {{row.tasks.length}}
                                         </td>
                                         <td>
-                                            {{row.createdAt}}
+                                            {{row.createdAt | date: 'dd/MM/yyyy'}}
                                         </td>
-                                        <td class=" text-primary">
-                                            {{row.dueDate}}
+                                        <td class=" text-warning">
+                                            {{row.dueDate | date: 'dd/MM/yyyy'}}
                                         </td>
                                     </tr>
 
