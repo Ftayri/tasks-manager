@@ -2,18 +2,6 @@ const ToDoList = require('../Models/TodoList');
 const { Task } = require('../Models/Task');
 
 module.exports = {
-    async getAllToDoLists(req, res) {
-        try {
-            const ToDoLists = await ToDoList.find().populate({
-                path: 'tasks',
-                select: 'title priority status'
-            });
-            res.json(ToDoLists);
-        } catch (error) {
-            console.error(error);
-            res.status(500).json({ message: 'Server error' });
-        }
-    },
 
     async updateToDoList(req, res) {
         const { id } = req.params;
