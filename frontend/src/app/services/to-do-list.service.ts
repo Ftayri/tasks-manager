@@ -14,6 +14,11 @@ export class ToDoListService {
     return this.httpClient.post(`${this.API_URL_USER}/todos`, { userId: firebaseUid });
   }
 
+
+  getToDoListById(id: string): Observable<any> {
+    return this.httpClient.get(`${this.API_URL_TODO}/${id}`);
+  }
+
   createToDoList(firebaseUid: string, toDoList: any): Observable<any> {
     const save = {
       ...toDoList,
@@ -39,6 +44,20 @@ export class ToDoListService {
       title: task.title,
       priority: task.priority,
       status: task.status,
+    });
+  }
+
+  updateToDoList(id: string, toDoList: any): Observable<any> {
+    const save = {
+      ...toDoList,
+      title: toDoList.title,
+      dueDate: toDoList.dueDate,
+      description: toDoList.description,
+    }
+    return this.httpClient.put(`${this.API_URL_TODO}/${id}`, {
+      title: save.title,
+      dueDate: save.dueDate,
+      description: save.description,
     });
   }
 }

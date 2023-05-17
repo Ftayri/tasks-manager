@@ -15,6 +15,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 
 import { ModalViewComponent } from './modal-view/modal-view.component';
 import { ModalTaskComponent } from './modal-task/modal-task.component';
+import { ModalEditComponent } from './modal-edit/modal-edit.component';
+
+import { MatButtonModule } from '@angular/material/button';
+
 
 
 @NgModule({
@@ -30,6 +34,7 @@ import { ModalTaskComponent } from './modal-task/modal-task.component';
     MatNativeDateModule,
     MatInputModule,
     MatDialogModule,
+    MatButtonModule,
   ],
   declarations: [
     AppComponent,
@@ -37,6 +42,7 @@ import { ModalTaskComponent } from './modal-task/modal-task.component';
     ModalDeleteComponent,
     ModalViewComponent,
     ModalTaskComponent,
+    ModalEditComponent,
 
   ],
   providers: [],
