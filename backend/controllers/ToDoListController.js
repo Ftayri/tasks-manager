@@ -1,5 +1,5 @@
 const ToDoList = require('../Models/ToDoList');
-const { Task } = require('../Models/Task');
+const Task  = require('../Models/Task');
 const User = require('../Models/User');
 
 module.exports = {
