@@ -14,6 +14,7 @@ import { ModalDeleteComponent } from './modal-delete/modal-delete.component';
 import { MatDialogModule } from '@angular/material/dialog';
 
 import { ModalViewComponent } from './modal-view/modal-view.component';
+import { ModalTaskComponent } from './modal-task/modal-task.component';
 import { ModalEditComponent } from './modal-edit/modal-edit.component';
 
 import { MatButtonModule } from '@angular/material/button';
@@ -40,6 +41,7 @@ import { MatButtonModule } from '@angular/material/button';
     AdminLayoutComponent,
     ModalDeleteComponent,
     ModalViewComponent,
+    ModalTaskComponent,
     ModalEditComponent,
 
   ],

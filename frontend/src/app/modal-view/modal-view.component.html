@@ -6,9 +6,13 @@
         </div>
 
         <div class="card-body">
-            <button class="btn btn-info btn-sm">
+            <button class="btn btn-info btn-sm" (click)="openCreateTaskModal()">
                 <i class="material-icons">add_circle</i>
                 Add Task
+            </button>
+            <button class="btn btn-danger btn-sm" (click)="close()">
+                <i class="material-icons">close</i>
+                close todo-list
             </button>
             <div class="table-responsive">
 
@@ -42,26 +46,29 @@
                             </td>
 
                             <td *ngIf="editIndex !== i"
-                                [ngClass]="{'text-danger': row.priority === 'High', 'text-warning': row.priority === 'Normal', 'text-success': row.priority === 'Low'}">
-                                {{ row.priority }}
+                                [ngClass]="{'text-danger': row.priority === 'high', 'text-warning': row.priority === 'normal', 'text-success': row.priority === 'low'}">
+                                {{ row.priority | titlecase }}
                             </td>
                             <td *ngIf="editIndex === i">
-                                <select formControlName="priority" value = {{taskForms[i].priority}}>
-                                    <option value="High">High</option>
-                                    <option value="Normal">Normal</option>
-                                    <option value="Low">Low</option>
+                                <select formControlName="priority">
+                                    <option [value]="'high'" [selected]="row.priority === 'high'">High</option>
+                                    <option [value]="'normal'" [selected]="row.priority === 'normal'">Normal</option>
+                                    <option [value]="'low'" [selected]="row.priority === 'low'">Low</option>
                                 </select>
+
                             </td>
 
                             <td *ngIf="editIndex !== i"
-                                [ngClass]="{'text-warning': row.status === 'Pending', 'text-success': row.status === 'Completed'}">
-                                {{ row.status }}
+                                [ngClass]="{'text-warning': row.status === 'pending', 'text-success': row.status === 'completed'}">
+                                {{ row.status | titlecase }}
                             </td>
                             <td *ngIf="editIndex === i">
-                                <select formControlName="status" value = {{taskForms[i].status}}>
-                                    <option value="Pending">Pending</option>
-                                    <option value="Completed">Completed</option>
+                                <select formControlName="status">
+                                    <option [value]="'pending'" [selected]="row.status === 'pending'">Pending</option>
+                                    <option [value]="'completed'" [selected]="row.status === 'completed'">Completed
+                                    </option>
                                 </select>
+
                             </td>
 
                             <td>
@@ -75,7 +82,7 @@
                                 <button *ngIf="editIndex === i" class="btn btn-warning btn-sm" (click)="cancelEdit(i)">
                                     <i class="material-icons">cancel</i>
                                 </button>
-                                <button class="btn btn-danger btn-sm" (click)="deleteTodoList(row._id)">
+                                <button class="btn btn-danger btn-sm" (click)="deleteTask(row._id)">
                                     <i class="material-icons">delete</i>
                                 </button>
                             </td>
