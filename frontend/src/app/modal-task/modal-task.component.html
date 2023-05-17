@@ -1,31 +1,27 @@
-<div class="col-md-12">
-    <div class="card">
-        <div class="card-header card-header-danger">
-            <h4 class="card-title ">Create new task</h4>
-        </div>
+<form class="example-form" [formGroup]="form" (submit)="onSubmit()">
+    <mat-form-field class="example-full-width">
+        <input matInput disabled value="Create new Task">
+    </mat-form-field>
 
-        <div class="card-body">
-            <form [formGroup]="form" (ngSubmit)="onSubmit()">
-                <div class="row">
-                  <div class="col-md-6">
-                    <mat-form-field class="example-full-width">
-                      <input matInput placeholder="Title" type="text" formControlName="title">
-                    </mat-form-field>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <label>Select Priority</label>
-                    <select matNativeControl formControlName="priority">
-                        <option *ngFor="let priority of priorities" [value]="priority">
-                          {{priority | titlecase}}
-                        </option>
-                      </select>
-                  </div>
-                </div>
-                <button mat-raised-button type="submit" class="btn btn-danger pull-right">Create Task</button>
-                <div class="clearfix"></div>
-              </form>
-        </div>
+    <table class="example-full-width" cellspacing="0">
+        <tr>
+            <td><mat-form-field class="example-full-width">
+                    <mat-label>Title</mat-label>
+                    <input matInput placeholder="Title" formControlName="title">
+                </mat-form-field></td>
+            <td></td>
+        </tr>
+    </table>
+
+    <p>
+        <select matNativeControl formControlName="priority">
+            <option value="">Select Priority</option>
+            <option *ngFor="let priority of priorities" [value]="priority">
+                {{ priority | titlecase }}
+            </option>
+        </select>
+    </p>
+    <div style="text-align: center;">
+        <button mat-raised-button color="warn" type="submit">Submit</button>
     </div>
-</div>
+</form>

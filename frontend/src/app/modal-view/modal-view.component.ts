@@ -59,7 +59,6 @@ export class ModalViewComponent implements OnInit {
 
     this.createTaskModal.open(ModalTaskComponent, { data: this.toDoList._id }).afterClosed().subscribe(
       (res: ToDoList) => {
-        this.toDoList = res;
         this.ngOnInit();
       }
     );
