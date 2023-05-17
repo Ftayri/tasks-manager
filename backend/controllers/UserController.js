@@ -54,4 +54,21 @@ module.exports = {
             res.status(500).json({ message: 'Server error' });
         }
     },
+    //get todolist by user firebaseUid
+    async getToDoList(req, res) {
+        try {
+            const { userId } = req.body;
+            const user = await User.where({ firebaseUid: userId }).findOne().populate('todolists');
+            if (!user) {
+                return res.status(404).json({ message: 'User not found' });
+            }
+            res.json(user.todolists);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Server error' });
+        }
+    }
+
+
+
 };
