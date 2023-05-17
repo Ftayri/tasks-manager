@@ -28,9 +28,18 @@ export class UserProfileComponent implements OnInit {
       this.toDoListService.createToDoList('362a9yi8bAZEG3gVoRIa91dVerS2', toDoList).subscribe(
         (response: any) => {
           console.log(response);
+          this.resetForm();
         }
       );
     }
+  }
+
+  resetForm() {
+    this.form.reset();
+
+    Object.keys(this.form.controls).forEach(controlName => {
+      this.form.get(controlName)?.setErrors(null);
+    });
   }
 
 }
