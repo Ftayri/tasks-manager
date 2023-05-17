@@ -77,6 +77,20 @@ module.exports = {
             console.error(error);
             res.status(500).json({ message: 'Server error' });
         }
+    },
+    
+    async getToDoList(req, res) {
+        try {
+            const { id } = req.params;
+            const toDoList = await ToDoList.findById(id).populate({
+                path: 'tasks',
+                select: 'title priority status'
+            });
+            res.json(toDoList);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Server error' });
     }
+    },
 
 };

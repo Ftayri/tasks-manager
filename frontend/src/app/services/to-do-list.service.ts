@@ -5,13 +5,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ToDoListService {
-  private API_URL = 'http://localhost:3000/api/user';
-  private Del = 'http://localhost:3000/api';
-
+  private API_URL_USER = 'http://localhost:3000/api/user';
+  private API_URL_TODO = 'http://localhost:3000/api/todolist';
   constructor(private httpClient: HttpClient) { }
 
   getToDoLists(firebaseUid: string): Observable<any> {
-    return this.httpClient.post(`${this.API_URL}/todos`, { userId: firebaseUid });
+    return this.httpClient.post(`${this.API_URL_USER}/todos`, { userId: firebaseUid });
   }
 
   createToDoList(firebaseUid: string, toDoList: any): Observable<any> {
@@ -21,13 +20,17 @@ export class ToDoListService {
       dueDate: toDoList.dueDate,
       description: toDoList.description,
     }
-    return this.httpClient.post(`${this.API_URL}/${firebaseUid}/todolist`, {
+    return this.httpClient.post(`${this.API_URL_USER}/${firebaseUid}/todolist`, {
       title: save.title,
       dueDate: save.dueDate,
       description: save.description,
     });
   }
   Delete(id: string) {
-    return this.httpClient.delete(`${this.Del}/todolist/${id}`);
+    return this.httpClient.delete(`${this.API_URL_TODO}/${id}`);
+  }
+
+  getToDoList(id: number): Observable<any> {
+    return this.httpClient.get(`${this.API_URL_TODO}/${id}`);
   }
 }
