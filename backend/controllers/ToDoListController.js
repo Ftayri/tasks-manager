@@ -8,17 +8,17 @@ module.exports = {
         const { title, tasks } = req.body;
 
         try {
-            const ToDoList = await ToDoList.findByIdAndUpdate(
+            const toDoList = await ToDoList.findByIdAndUpdate(
                 id,
                 { title, tasks },
                 { new: true }
             ).populate('tasks');
 
-            if (!ToDoList) {
+            if (!toDoList) {
                 return res.status(404).json({ message: 'ToDoList not found' });
             }
 
-            res.json(ToDoList);
+            res.json(toDoList);
         } catch (error) {
             console.error(error);
             res.status(500).json({ message: 'Server error' });
@@ -29,8 +29,9 @@ module.exports = {
         const { id } = req.params;
 
         try {
-            const ToDoList = await ToDoList.findByIdAndDelete(id).populate('tasks');
-            if (!ToDoList) {
+            const toDoList = await ToDoList.findByIdAndDelete(id);
+
+            if (!toDoList) {
                 return res.status(404).json({ message: 'ToDoList not found' });
             }
             res.json({ message: 'ToDoList deleted' });
