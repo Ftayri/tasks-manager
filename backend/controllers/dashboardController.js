@@ -1,6 +1,6 @@
 const User = require('../Models/User');
 const Task = require('../Models/Task');
-const ToDoList = require('../Models/TodoList');
+const ToDoList = require('../Models/ToDoList');
 
 module.exports = {
     async dashboardTasks(req, res) {

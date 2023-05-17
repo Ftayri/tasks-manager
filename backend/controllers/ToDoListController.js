@@ -1,4 +1,4 @@
-const ToDoList = require('../Models/TodoList');
+const ToDoList = require('../Models/ToDoList');
 const { Task } = require('../Models/Task');
 const User = require('../Models/User');
 

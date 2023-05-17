@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const ToDoList = require('./TodoList');
+const ToDoList = require('./ToDoList');
 
 const userSchema = new mongoose.Schema({
     firebaseUid: {

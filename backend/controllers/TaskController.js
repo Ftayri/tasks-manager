@@ -1,5 +1,5 @@
 const Task = require('../Models/Task');
-
+const ToDoList = require('../Models/ToDoList');
 module.exports = {
 
     async updateTask(req, res) {
@@ -24,7 +24,7 @@ module.exports = {
     async deleteTask(req, res) {
         try {
             const { id } = req.params;
-            const deletedTask = await Task.findByIdAndDelete(id);
+            const deletedTask = await Task.findByIdAndUpdate(id);
             if (!deletedTask) {
                 return res.status(404).json({ message: 'Task not found' });
             }
