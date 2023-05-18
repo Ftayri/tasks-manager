@@ -14,12 +14,16 @@
     </table>
 
     <p>
-        <select matNativeControl formControlName="priority">
-            <option value="">Select Priority</option>
-            <option *ngFor="let priority of priorities" [value]="priority">
-                {{ priority | titlecase }}
-            </option>
-        </select>
+        <mat-form-field>
+            <mat-label>Priority</mat-label>
+            <select matNativeControl formControlName="priority">
+                <option value="" disabled selected>Select Priority</option>
+                <option *ngFor="let priority of priorities" [value]="priority">
+                    {{ priority | titlecase }}
+                </option>
+            </select>
+        </mat-form-field>
+
     </p>
     <div style="text-align: center;">
         <button mat-raised-button color="warn" type="submit">Submit</button>
