@@ -5,6 +5,7 @@ import { ModalViewComponent } from 'app/modal-view/modal-view.component';
 import { ToDoListService } from 'app/services/to-do-list.service';
 import { ToDoList } from 'app/models/to-do-list';
 import { ModalEditComponent } from 'app/modal-edit/modal-edit.component';
+import { AuthService } from 'app/services/auth.service';
 
 @Component({
   selector: 'app-table-list',
@@ -15,7 +16,7 @@ export class TableListComponent implements OnInit {
   toDoLists: ToDoList[];
   toDoList: ToDoList;
 
-  constructor(private toDoListService: ToDoListService, private modalView: MatDialog, private dialog: MatDialog) { }
+  constructor(private toDoListService: ToDoListService, private modalView: MatDialog, private dialog: MatDialog, private authService: AuthService) { }
   deleteTodoList(id: string) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
@@ -23,7 +24,7 @@ export class TableListComponent implements OnInit {
     dialogRef.afterClosed().subscribe((x) => {
       if (x) {
         this.toDoListService.Delete(id).subscribe(res => {
-          this.toDoListService.getToDoLists("362a9yi8bAZEG3gVoRIa91dVerS2");
+          this.toDoListService.getToDoLists(this.authService.getCurrentUser()._id);
           console.log('Deleted');
           this.ngOnInit();
         });
@@ -49,7 +50,7 @@ export class TableListComponent implements OnInit {
     );
   }
   ngOnInit() {
-    this.toDoListService.getToDoLists("362a9yi8bAZEG3gVoRIa91dVerS2").subscribe(
+    this.toDoListService.getToDoLists(this.authService.getCurrentUser().firebaseUid).subscribe(
       (res) => {
         console.log(res);
         this.toDoLists = res;

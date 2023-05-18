@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'app/services/auth.service';
 
 declare const $: any;
 declare interface RouteInfo {
@@ -11,7 +12,6 @@ export const ROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard', icon: 'dashboard', class: '' },
   { path: '/create-task', title: 'Create Task', icon: 'edit_square', class: '' },
   { path: '/table-list', title: 'Table List', icon: 'content_paste', class: '' },
-  { path: '/typography', title: 'Typography', icon: 'library_books', class: '' },
 
 ];
 
@@ -23,7 +23,7 @@ export const ROUTES: RouteInfo[] = [
 export class SidebarComponent implements OnInit {
   menuItems: any[];
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
@@ -34,4 +34,7 @@ export class SidebarComponent implements OnInit {
     }
     return true;
   };
+  logout(){
+    this.authService.doLogout();
+  }
 }

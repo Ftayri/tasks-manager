@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'app/services/auth.service';
 import { ToDoListService } from 'app/services/to-do-list.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class UserProfileComponent implements OnInit {
 
   form!: FormGroup;
 
-  constructor(private toDoListService: ToDoListService) { }
+  constructor(private toDoListService: ToDoListService, private authService: AuthService) { }
   ngOnInit() {
     this.initForm();
   }
@@ -25,7 +26,7 @@ export class UserProfileComponent implements OnInit {
   onSubmit(): void {
     if (this.form.valid) {
       const toDoList = this.form.value;
-      this.toDoListService.createToDoList('362a9yi8bAZEG3gVoRIa91dVerS2', toDoList).subscribe(
+      this.toDoListService.createToDoList(this.authService.getCurrentUser().firebaseUid, toDoList).subscribe(
         (response: any) => {
           console.log(response);
           this.resetForm();

@@ -19,6 +19,7 @@ import { ModalEditComponent } from './modal-edit/modal-edit.component';
 
 import { MatButtonModule } from '@angular/material/button';
 import { FirebaseModule } from '../../FirebaseModule';
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -45,6 +46,7 @@ import { FirebaseModule } from '../../FirebaseModule';
     ModalViewComponent,
     ModalTaskComponent,
     ModalEditComponent,
+    LoginComponent,
 
   ],
   providers: [],

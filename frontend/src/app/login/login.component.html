@@ -1,0 +1,22 @@
+<div class="col-md-12">
+    <div class="card">
+      <div class="card-header card-header-danger">
+        <h4 class="card-title">Welcome Back! Please login.</h4>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" formControlName="email" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password"  formControlName="password" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'app/services/auth.service';
 import { DashboardService } from 'app/services/dashboard.service';
 import * as Chartist from 'chartist';
 
@@ -29,7 +30,7 @@ export class DashboardComponent implements OnInit {
     ]
   }
 
-  constructor(private dashboardService: DashboardService) { }
+  constructor(private dashboardService: DashboardService, private authService: AuthService) { }
   startAnimationForLineChart(chart) {
     let seq: any, delays: any, durations: any;
     seq = 0;
@@ -89,7 +90,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
 
 
-    this.dashboardService.tasksStats("362a9yi8bAZEG3gVoRIa91dVerS2").subscribe(
+    this.dashboardService.tasksStats(this.authService.getCurrentUser().firebaseUid).subscribe(
       (res) => {
         this.taskStats = res;
         const dataPieChart: any = {
@@ -110,7 +111,7 @@ export class DashboardComponent implements OnInit {
       },
     );
 
-    this.dashboardService.todoListsStats("362a9yi8bAZEG3gVoRIa91dVerS2").subscribe(
+    this.dashboardService.todoListsStats(this.authService.getCurrentUser().firebaseUid).subscribe(
       (res) => {
         this.todoListsStats = res;
         console.log(this.todoListsStats);
