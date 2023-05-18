@@ -3,6 +3,7 @@ import { ROUTES } from '../sidebar/sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Router } from '@angular/router';
 import { DashboardService } from 'app/services/dashboard.service';
+import { AuthService } from 'app/services/auth.service';
 
 @Component({
     selector: 'app-navbar',
@@ -33,14 +34,14 @@ export class NavbarComponent implements OnInit {
         totalToDoLists: number,
         overdueToDoLists: number,
         countPerDay: [
-          {
-            day: number,
-            count: number,
-          }
+            {
+                day: number,
+                count: number,
+            }
         ]
-      }
+    }
 
-    constructor(location: Location, private element: ElementRef, private router: Router, private dashboardService: DashboardService) {
+    constructor(location: Location, private element: ElementRef, private router: Router, private dashboardService: DashboardService, private authService: AuthService) {
         this.location = location;
         this.sidebarVisible = false;
     }
@@ -150,17 +151,18 @@ export class NavbarComponent implements OnInit {
     }
 
     notification() {
-        this.dashboardService.tasksStats("362a9yi8bAZEG3gVoRIa91dVerS2").subscribe(
+        this.dashboardService.tasksStats(this.authService.getCurrentUser().firebaseUid).subscribe(
             (res) => {
                 this.taskStats = res;
                 console.log(this.taskStats);
 
             });
 
-            this.dashboardService.todoListsStats("362a9yi8bAZEG3gVoRIa91dVerS2").subscribe(
-                (res) => {
-                  this.todoListsStats = res;}
-            );   
+        this.dashboardService.todoListsStats(this.authService.getCurrentUser().firebaseUid).subscribe(
+            (res) => {
+                this.todoListsStats = res;
+            }
+        );
     }
 
 }
