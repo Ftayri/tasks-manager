@@ -8,6 +8,7 @@ import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
+import { RegisterComponent } from 'app/register/register.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -52,6 +53,7 @@ export const AdminLayoutRoutes: Routes = [
     //         component: UpgradeComponent
     //     }]
     // }
+    { path: 'register',        component: RegisterComponent},
     { path: 'dashboard',      component: DashboardComponent },
     { path: 'create-task',   component: UserProfileComponent },
     { path: 'table-list',     component: TableListComponent },

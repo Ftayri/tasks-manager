@@ -20,6 +20,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatOptionModule } from '@angular/material/core';
+import { RegisterComponent } from 'app/register/register.component';
 
 @NgModule({
   imports: [
@@ -46,6 +47,7 @@ import { MatOptionModule } from '@angular/material/core';
     MapsComponent,
     NotificationsComponent,
     UpgradeComponent,
+    RegisterComponent,
   ]
 })
 
