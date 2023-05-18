@@ -40,10 +40,10 @@ module.exports = {
 
 
     async getUser(req, res) {
-        const { id } = req.body;
+        const { firebaseUid } = req.body;
 
         try {
-            const user = await User.findById(id).populate('todolists');
+            const user = await User.where({ firebaseUid: firebaseUid }).findOne().populate('todolists');
 
             if (!user) {
                 return res.status(404).json({ message: 'User not found' });
