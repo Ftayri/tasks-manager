@@ -11,21 +11,21 @@ import * as Chartist from 'chartist';
 export class DashboardComponent implements OnInit {
 
   taskStats: {
-    totalCompleted: number,
-    totalPending: number,
+    totalCompleted: 0,
+    totalPending: 0,
     pendingPerPriority: {
-      high: number,
-      medium: number,
-      low: number
+      high: 0,
+      medium: 0,
+      low: 0
     }
   }
-  todoListsStats: {
-    totalToDoLists: number,
-    overdueToDoLists: number,
+  todoListsStats:  {
+    totalToDoLists: 0,
+    overdueToDoLists: 0,
     countPerDay: [
       {
-        day: number,
-        count: number,
+        day: 0,
+        count: 0,
       }
     ]
   }

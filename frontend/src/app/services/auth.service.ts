@@ -17,7 +17,6 @@ export class AuthService {
         const user = userCredential.user;
         const uid = user.uid;
         this.httpClient.post(`${this.API_URL}/create-user`, { username: username, firebaseUid: uid }).subscribe((response: User) => {
-          localStorage.setItem('user', JSON.stringify(response));
           this.currentUser = response;
         });
       });
@@ -27,7 +26,6 @@ export class AuthService {
       var user = userCredential.user;
       const uid = user.uid;
       this.httpClient.post(`${this.API_URL}/user`, { firebaseUid: uid }).subscribe((response: User) => {
-        localStorage.setItem('user', JSON.stringify(response));
         this.currentUser = response;
       })
     });
@@ -37,6 +35,7 @@ export class AuthService {
     return this.afAuth.signOut();
   }
   getCurrentUser(): User {
+
     return this.currentUser;
   }
 }

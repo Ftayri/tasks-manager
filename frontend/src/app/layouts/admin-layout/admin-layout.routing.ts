@@ -56,7 +56,7 @@ export const AdminLayoutRoutes: Routes = [
     // }
 
     { path: 'dashboard', component: DashboardComponent },
-    { path: 'create-task', component: UserProfileComponent },
+    { path: 'create-todolist', component: UserProfileComponent },
     { path: 'table-list', component: TableListComponent },
     { path: 'typography', component: TypographyComponent },
     { path: 'icons', component: IconsComponent },

@@ -42,7 +42,9 @@
                                 {{ row.title }}
                             </td>
                             <td *ngIf="editIndex === i">
-                                <input style="width: 100px;" type="text" formControlName="title">
+                                <mat-form-field>
+                                    <input matInput type="text" formControlName="title">
+                                </mat-form-field>
                             </td>
 
                             <td *ngIf="editIndex !== i"
@@ -50,11 +52,14 @@
                                 {{ row.priority | titlecase }}
                             </td>
                             <td *ngIf="editIndex === i">
-                                <select formControlName="priority">
-                                    <option [value]="'high'" [selected]="row.priority === 'high'">High</option>
-                                    <option [value]="'normal'" [selected]="row.priority === 'normal'">Normal</option>
-                                    <option [value]="'low'" [selected]="row.priority === 'low'">Low</option>
-                                </select>
+                                <mat-form-field>
+                                    <select matNativeControl formControlName="priority">
+                                        <option [value]="'high'" [selected]="row.priority === 'high'">High</option>
+                                        <option [value]="'normal'" [selected]="row.priority === 'normal'">Normal
+                                        </option>
+                                        <option [value]="'low'" [selected]="row.priority === 'low'">Low</option>
+                                    </select>
+                                </mat-form-field>
 
                             </td>
 
@@ -63,11 +68,14 @@
                                 {{ row.status | titlecase }}
                             </td>
                             <td *ngIf="editIndex === i">
-                                <select formControlName="status">
-                                    <option [value]="'pending'" [selected]="row.status === 'pending'">Pending</option>
-                                    <option [value]="'completed'" [selected]="row.status === 'completed'">Completed
-                                    </option>
-                                </select>
+                                <mat-form-field>
+                                    <select matNativeControl formControlName="status">
+                                        <option [value]="'pending'" [selected]="row.status === 'pending'">Pending
+                                        </option>
+                                        <option [value]="'completed'" [selected]="row.status === 'completed'">Completed
+                                        </option>
+                                    </select>
+                                </mat-form-field>
 
                             </td>
 
