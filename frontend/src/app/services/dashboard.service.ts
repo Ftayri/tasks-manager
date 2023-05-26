@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 })
 export class DashboardService {
 
-  private API_URL = 'http://localhost:3000/api/dashboard';
+  private API_URL = '/api/dashboard';
   constructor(private httpClient: HttpClient) { }
   tasksStats(firebaseUid: string): Observable<any>{
     return this.httpClient.post(`${this.API_URL}/tasks`, {firebaseUid: firebaseUid});

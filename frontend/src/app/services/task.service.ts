@@ -6,7 +6,7 @@ import { Task } from 'app/models/task';
   providedIn: 'root'
 })
 export class TaskService {
-  private API_URL='http://localhost:3000/api/task';
+  private API_URL='/api/task';
   constructor(private httpClient: HttpClient) { }
   deleteTask(id: string) {
     return this.httpClient.delete(`${this.API_URL}/${id}`);

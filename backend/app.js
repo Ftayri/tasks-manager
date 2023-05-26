@@ -23,7 +23,7 @@ app.listen(3000, () => {
 
 
 app.use(express.json());
-mongoose.connect('mongodb://127.0.0.1:27017/tasks-database', {
+mongoose.connect('mongodb://database:27017/tasks-database', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 

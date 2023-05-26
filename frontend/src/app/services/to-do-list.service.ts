@@ -6,8 +6,8 @@ import { Task } from 'app/models/task';
   providedIn: 'root'
 })
 export class ToDoListService {
-  private API_URL_USER = 'http://localhost:3000/api/user';
-  private API_URL_TODO = 'http://localhost:3000/api/todolist';
+  private API_URL_USER = '/api/user';
+  private API_URL_TODO = '/api/todolist';
   constructor(private httpClient: HttpClient) { }
 
   getToDoLists(firebaseUid: string): Observable<any> {

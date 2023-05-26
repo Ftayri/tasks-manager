@@ -9,7 +9,7 @@ import { User } from 'app/models/user';
 export class AuthService {
 
   private currentUser: User;
-  private API_URL = 'http://localhost:3000/api';
+  private API_URL = '/api';
   constructor(private httpClient: HttpClient, public afAuth: AngularFireAuth) { }
   register(email: string, username: string, password: string) {
     return this.afAuth.createUserWithEmailAndPassword(email, password)
