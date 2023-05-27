@@ -4,8 +4,11 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+    image: iyedzairi/tasks-manager:frontend
     ports:
       - 80:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
     networks:
       - tasks_manager_network
     depends_on:
@@ -15,29 +18,14 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    ports:
-      - 3000:3000
+    image: iyedzairi/tasks-manager:backend
     depends_on:
       - database
     networks:
       - tasks_manager_network
 
-  reverse-proxy:
-    image: nginx
-    ports:
-      - 8080:80
-    volumes:
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf
-    depends_on:
-      - frontend
-      - backend
-    networks:
-      - tasks_manager_network
-
   database:
     image: mongo
-    ports:
-      - 27017:27017
     volumes:
       - mongodb_data:/data/db
     networks:
